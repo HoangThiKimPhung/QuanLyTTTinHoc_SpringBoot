@@ -29,7 +29,7 @@ public class TinTucRestController {
 	public String FindTinTuc(@RequestParam("maTT") String maTT,HttpServletRequest request) {
 		Optional<TinTuc> tintucEdit = tinTucService.findOneTinTuc(maTT);
 		if(tintucEdit != null) {
-			request.getServletContext().setAttribute("tintucEdit", tintucEdit);
+			request.getSession().setAttribute("tintucEdit", tintucEdit);
 			return "ok";
 		}
 		return "fail";
@@ -37,7 +37,7 @@ public class TinTucRestController {
 	
 	@GetMapping("/getTinTucEdit")
 	public @ResponseBody Optional<TinTuc> GetTinTucEdit(HttpServletRequest request){
-		Optional<TinTuc> tintucEdit = (Optional<TinTuc>)request.getServletContext().getAttribute("tintucEdit");
+		Optional<TinTuc> tintucEdit = (Optional<TinTuc>)request.getSession().getAttribute("tintucEdit");
 		return tintucEdit;
 		
 	}
