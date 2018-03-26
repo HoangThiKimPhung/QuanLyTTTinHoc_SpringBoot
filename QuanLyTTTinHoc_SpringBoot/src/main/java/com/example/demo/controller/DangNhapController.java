@@ -38,6 +38,7 @@ public class DangNhapController {
 	
 	public static String codeDrive = null;
 	public static String redirectURL = "http://localhost:8080/nhanvien";
+	//public static String redirectURL = "https://8080-dot-3647416-dot-devshell.appspot.com/nhanvien";
 	public static Drive service = null;
 	public static GoogleAuthorizationCodeFlow flow = null;
 	public static GoogleClientSecrets clientSecrets = null;

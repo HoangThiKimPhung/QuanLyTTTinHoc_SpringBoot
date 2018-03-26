@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo</name>
+	<name>QuanLyTTTinHoc_SpringBoot</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -46,9 +46,16 @@
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
+		<!-- MySQL -->
 		<dependency>
 		  <groupId>mysql</groupId>
 		  <artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- SocketFactory -->
+		<dependency>
+		    <groupId>com.google.cloud.sql</groupId>
+		    <artifactId>mysql-socket-factory</artifactId>
+		    <version>1.0.0-beta1</version>
 		</dependency>
 		
 		<dependency>
@@ -64,21 +71,12 @@
 		      <scope>provided</scope>
 		</dependency>
 		
-		
-		<!-- SocketFactory -->
-		<dependency>
-		    <groupId>com.google.cloud.sql</groupId>
-		    <artifactId>mysql-socket-factory</artifactId>
-		    <version>1.0.0-beta1</version>
-		</dependency>
-		
 		<!-- GG API -->
 		<dependency>
 			  <groupId>com.google.api-client</groupId>
 		      <artifactId>google-api-client</artifactId>
 		      <version>1.23.0</version>
 		</dependency>
-		
 		
 		<dependency>
 			<groupId>com.google.apis</groupId>
