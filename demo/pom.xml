@@ -28,21 +28,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			  <exclusions>
-		        <exclusion>
-		          <groupId>org.springframework.boot</groupId>
-		          <artifactId>spring-boot-starter-tomcat</artifactId>
-		        </exclusion>
-		      </exclusions>
 		</dependency>
 		
-		<!-- App Engine -->
 		<dependency>
-		    <groupId>com.google.appengine</groupId>
-		    <artifactId>appengine-tools-sdk</artifactId>
-		    <version>1.9.63</version>
+			<groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -72,20 +64,14 @@
 		      <scope>provided</scope>
 		</dependency>
 		
+		
 		<!-- SocketFactory -->
 		<dependency>
 		    <groupId>com.google.cloud.sql</groupId>
 		    <artifactId>mysql-socket-factory</artifactId>
 		    <version>1.0.0-beta1</version>
 		</dependency>
-
-		<!-- SLF4J Bridge -->
-		<dependency>
-	      <groupId>org.slf4j</groupId>
-	      <artifactId>jul-to-slf4j</artifactId>
-	      <scope>provided</scope>
-	    </dependency>
-						
+		
 		<!-- GG API -->
 		<dependency>
 			  <groupId>com.google.api-client</groupId>
@@ -113,11 +99,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-		        <groupId>com.google.appengine</groupId>
-		        <artifactId>appengine-maven-plugin</artifactId>
-		        <version>1.9.60</version>
-		    </plugin>
 		</plugins>
 	</build>
 
