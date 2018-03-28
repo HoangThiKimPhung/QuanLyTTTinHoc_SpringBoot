@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.service.TinTucService;
@@ -26,6 +27,7 @@ public class TinTucController {
 	public static String errorinput = "";
 	@Autowired
 	private TinTucService tinTucService;
+	
 
 	@PostMapping("/addtintuc")
 	public String ThemTinTuc(@RequestParam("tieuDeTinTuc") String tieuDeTinTuc, @RequestParam("tomTatTinTuc") String tomTatTinTuc,
@@ -77,6 +79,22 @@ public class TinTucController {
         tinTucService.EditTinTuc(maTinTuc, tieuDeTinTuc, tomTatTinTuc, ngayDangTinTuc, idFileTT);
     	
 		return "redirect:/NV-quanlytintuc";
+	}
+	
+	@PostMapping("/editTinTucWebpage")
+	public @ResponseBody boolean EditTinTucWebpage(@RequestParam("maTinTuc") String maTinTuc,
+			@RequestParam("tieuDeTinTuc") String tieuDeTinTuc,
+			@RequestParam("tomTatTinTuc") String tomTatTinTuc,
+			HttpServletRequest request) throws IOException {
+		errorinput = "";
+		request.getSession().setAttribute("errorinput",errorinput);
+		
+        if(tieuDeTinTuc.trim().length() <= 0 || tomTatTinTuc.trim().length() <= 0) {
+        	errorinput = "Vui lòng nhập đầy đủ thông tin cho Tin tức!!!";
+        	request.getSession().setAttribute("errorinput",errorinput);
+        	return false;
+        }
+        return tinTucService.EditTinTucWebpage(maTinTuc, tieuDeTinTuc, tomTatTinTuc);
 	}
 	
 	public String uploadFile(MultipartFile file, Drive service) throws IOException{

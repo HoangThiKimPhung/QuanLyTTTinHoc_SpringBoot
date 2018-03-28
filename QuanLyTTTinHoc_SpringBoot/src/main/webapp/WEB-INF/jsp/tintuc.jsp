@@ -19,13 +19,20 @@
     <link rel="stylesheet" href="static/css/thongbao_tintuc.css" />
     <link rel="stylesheet" href="static/css/header-menu-fooder.css" />
     <!-- My JS -->
-    <script src="static/js/login.js"></script>
-    <script src="static/js/include-html.js"></script>
-    <!-- <script src="./JS/tintuc.js"></script> -->
+    <script src="static/js/tintuc.js"></script>
     <!-- TƯ VẤN -->
     <script src="static/js/tuvan.js"></script>
+    <script src="static/js/ckeditor.js"></script>
+    
 </head>
 <body>
+	<%
+		boolean flag = false;
+		String maNV = (String)request.getSession().getAttribute("maNV");
+		if(maNV != null){
+			flag = true;
+		}
+	%>
 	<!-- Logo and menu bar -->
     <header>
     	<div class="container">
@@ -45,10 +52,10 @@
 		            <div id="navbar" class="navbar-collapse collapse">
 		                <ul class="nav navbar-nav navbar-left">
 		                    <li><a href="/index">Trang chủ</a></li>
-		                    <li><a href="#">Lịch khai giảng</a></li>
+		                    <li><a href="/lichkhaigiang">Lịch khai giảng</a></li>
 		                    <li  style="background-color: #56A1B0"><a href="tintuc">Tin tức</a></li>
-		                    <li><a href="#">Thông báo</a></li>
-		                    <li><a href="#">Liên hệ</a></li>
+		                    <li><a href="/thongbao">Thông báo</a></li>
+		                    <li><a href="/lienhe">Liên hệ</a></li>
 		                </ul>
 		                <ul class="nav navbar-nav navbar-right">
 		                    <li id="dang-ky-khoa-hoc">
@@ -58,10 +65,17 @@
 		                        </a>
 		                    </li>
 		                    <li>
-		                        <a href="#">
-		                            <i class="fa fa-user-circle-o"></i>
-		                            <span class="menu-right">Đăng nhập</span>
-		                        </a>
+		                    	<%if(flag){%>		                    		
+			                        <a href="/index">
+			                            <i class="fa fa-user-circle-o"></i>
+			                            <span class="menu-right" id="btnDangXuat">Đăng xuất</span>
+			                        </a>
+		                        <%}else{ %>
+		                        	<a href="/login">
+			                            <i class="fa fa-user-circle-o"></i>
+			                            <span class="menu-right" id="btnDangNhap">Đăng nhập</span>
+			                        </a>
+		                        <%} %>
 		                    </li>
 		                </ul>
 		            </div>
@@ -73,6 +87,13 @@
         <p><a href="index">Trang chủ</a> / <a href="tintuc">Tin tức</a></p>
     </div>
     <!-- TIN TỨC CHÍNH -->
+    <div style="text-align: center;">
+     	<h5 style="color: red; font-weight: bold;">
+     		<% if(request.getSession().getAttribute("errorinput") != null){ %>
+     			<%=request.getSession().getAttribute("errorinput")%>
+     		<%} %>
+     	</h5>
+    </div>
     <section class="container" style="padding: 0;">
     	<div id="tintucChinh" style="display: none;">
     		<div class="col-xs-12 col-sm-12 col-md-12">
@@ -81,16 +102,26 @@
 	                <video id="divVideoTinTuc" width="100%" controls style="display: none;">
 	                    <source id="videoTTChinh" type="video/mp4" >
 	                </video>
-	                <img id="imageTTChinh" alt="Tin tức" width="100%" style="display: none;">
+	                <img src="" id="imageTTChinh" alt="Tin tức" width="100%" style="display: none;height:450px;">
 	            </div>
 	            <div class="col-xs-12 col-sm-12 col-md-5 thong-bao-tin-tuc">
+	            	<input type="hidden" name="maTinTuc" id="maTTchinh" class="form-control">
 	            	<h3>
 		            	<a id="tieuDeTTChinh" style="font-weight: bold;"></a>
-		            	<image src="static/Pic/icon-new.gif" style="width: 50px"></image>
+		            	<p id="chinhsuatieudechinh" style="font-weight: bold;display: none;">Tiêu đề tin tức:</p>
+		            	<textarea id="textchinhsuatieudechinh" class="form-control" style="display:none;" rows="2" cols="50"></textarea>
+		            	<image id="iconnew" src="static/Pic/icon-new.gif" style="width: 50px"></image>
 		            </h3>
-		            <i class="fa fa-clock-o"></i>
+		            <i id="clockchinh" class="fa fa-clock-o"></i>
 		            <span id="ngayDangTTChinh"></span>
-		            <p id="noiDungTomTatTTChinh" class="noi-dung-tom-tat-chinh"></p>
+		            <p id="noiDungTomTatTTChinh" class="noi-dung-tom-tat-chinh "></p>
+		            <p id="chinhsuatintucchinh" style="font-weight: bold; font-size: 25px;display: none;">Nội dung tin tức:</p>
+		            <textarea id="textchinhsuatintucchinh" class="form-control" style="display:none;" rows="7" cols="75" name="editor" id="editor"></textarea>
+		            <script type="text/javascript">
+    					CKEDITOR.replace('editor');
+   					</script>
+		            <%if(flag){%><a id="edittintucchinh" style="float:right;padding:10px;color:white;background:#197485;cursor:pointer;">Chỉnh sửa</a><%} %>
+		            <button id="submittintucchinh" style="border:1px solid #197485;margin-top:5px;float:right;padding:10px;color:white;background:#197485;display:none;">Xác nhận</button>
 	            </div>
 	        </div>
     	</div>
@@ -101,19 +132,27 @@
 		<div id="TTPhu1" style="display: none">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="col-md-12 line"></div>
-		        <div class="col-xs-5 col-sm-5 col-md-3">
+		        <div class="col-xs-5 col-sm-5 col-md-4">
 		        	<video id="divVideoTinTucPhu1" width="100%" controls style="display: none;">
 	                    <source id="videoTTPhu1" type="video/mp4" >
 	                </video>
-	                <img id="imageTTPhu1" alt="Tin tức" width="100%" style="display: none;">
+	                <img src="" id="imageTTPhu1" alt="Tin tức" width="100%" style="display: none;">
 		        </div>
-		        <div class="col-xs-7 col-sm-7 col-md-9 thong-bao-tin-tuc">
-		            <h3>
-		            	<a id="tieuDeTTPhu1"></a>
-		            </h3>
-		            <i class="fa fa-clock-o"></i>
-		            <span id="ngayDangTTPhu1"></span>
-		            <p id="noiDungTomTatTTPhu1" class="noi-dung-tom-tat"></p>            
+		        <div class="col-xs-7 col-sm-7 col-md-8 thong-bao-tin-tuc">
+		            	<input type="hidden" name="maTinTuc" id="maTTphu1" class="form-control">		            
+			            <h3>
+			            	<a id="tieuDeTTPhu1"></a>
+			            	<p id="chinhsuatieudephu1" style="font-weight: bold; font-size: 25px;display: none;">Tiêu đề tin tức:</p>
+			            	<textarea id="textchinhsuatieudephu1" class="form-control" name="tieuDeTinTuc" style="display:none;" rows="1" cols="72"></textarea>
+			            </h3>
+			            <i id="clockphu1" class="fa fa-clock-o"></i>
+			            <span id="ngayDangTTPhu1"></span>
+			            <p id="noiDungTomTatTTPhu1" class="noi-dung-tom-tat"></p>			            
+			            <p id="chinhsuatintucphu1" style="font-weight: bold; font-size: 25px;display: none;">Nội dung tin tức:</p>
+			            <textarea id="textchinhsuatintucphu1" class="form-control" style="display:none;" rows="2" cols="110" name="tomTatTinTuc"></textarea>
+			            <%if(flag){%><a id="edittintucphu1" style="float:right;padding:10px;color:white;background:#197485;cursor:pointer;">Chỉnh sửa</a><%} %>  
+			            <button id="submittintucphu1" style="border:1px solid #197485;margin-top:5px;float:right;padding:10px;color:white;background:#197485;display:none;">Xác nhận</button> 
+		         
 		        </div>
 		    </div>
 		</div>
@@ -122,19 +161,26 @@
 	    <div id="TTPhu2" style="display: none">
 	    	<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="col-md-12 line"></div>
-		        <div class="col-xs-5 col-sm-5 col-md-3">
+		        <div class="col-xs-5 col-sm-5 col-md-4">
 		        	<video id="divVideoTinTucPhu2" width="100%" controls style="display: none;">
 	                    <source id="videoTTPhu2" type="video/mp4" >
 	                </video>
-		            <img id="imageTTPhu2" alt="Tin tức" width="100%">
+		            <img src="" id="imageTTPhu2" alt="Tin tức" width="100%">
 		        </div>
-		        <div class="col-xs-7 col-sm-7 col-md-9 thong-bao-tin-tuc">
+		        <div class="col-xs-7 col-sm-7 col-md-8 thong-bao-tin-tuc">
+		        	<input type="hidden" name="maTinTuc" id="maTTphu2" class="form-control">	
 		            <h3>
 		            	<a id="tieuDeTTPhu2"></a>
+		            	<p id="chinhsuatieudephu2" style="font-weight: bold; font-size: 25px;display: none;">Tiêu đề tin tức:</p>
+		            	<textarea id="textchinhsuatieudephu2" class="form-control" style="display:none;" rows="1" cols="72" name="editor" id="editor"></textarea>
 		            </h3>
-		            <i class="fa fa-clock-o"></i>
+		            <i id="clockphu2" class="fa fa-clock-o"></i>
 		            <span id="ngayDangTTPhu2"></span>
-		            <p id="noiDungTomTatTTPhu2" class="noi-dung-tom-tat"></p>            
+		            <p id="noiDungTomTatTTPhu2" class="noi-dung-tom-tat"></p>
+		            <p id="chinhsuatintucphu2" style="font-weight: bold; font-size: 25px;display: none;">Nội dung tin tức:</p>
+		            <textarea id="textchinhsuatintucphu2" class="form-control" style="display:none;" rows="2" cols="110" name="editor" id="editor"></textarea>
+		            <%if(flag){%><a id="edittintucphu2" style="float:right;padding:10px;color:white;background:#197485;cursor: pointer;">Chỉnh sửa</a><%} %>
+		            <button id="submittintucphu2" style="border:1px solid #197485;margin-top:5px;float:right;padding:10px;color:white;background:#197485;display:none;">Xác nhận</button>  
 		        </div>
 		    </div>
 	    </div>
@@ -143,19 +189,26 @@
 	    <div id="TTPhu3" style="display: none">
 	    	<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="col-md-12 line"></div>
-		        <div class="col-xs-5 col-sm-5 col-md-3">
+		        <div class="col-xs-5 col-sm-5 col-md-4">
 		        	<video id="divVideoTinTucPhu3" width="100%" controls style="display: none;">
 	                    <source id="videoTTPhu3" type="video/mp4" >
 	                </video>
-		            <img id="imageTTPhu3" alt="Tin tức" width="100%">
+		            <img src="" id="imageTTPhu3" alt="Tin tức" width="100%">
 		        </div>
-		        <div class="col-xs-7 col-sm-7 col-md-9 thong-bao-tin-tuc">
+		        <div class="col-xs-7 col-sm-7 col-md-8 thong-bao-tin-tuc">
+		        	<input type="hidden" name="maTinTuc" id="maTTphu3" class="form-control">	
 		            <h3>
 		            	<a id="tieuDeTTPhu3"></a>
+		            	<p id="chinhsuatieudephu3" style="font-weight: bold; font-size: 25px;display: none;">Tiêu đề tin tức:</p>
+		            	<textarea id="textchinhsuatieudephu3" class="form-control" style="display:none;" rows="1" cols="72" name="editor" id="editor"></textarea>
 		            </h3>
-		            <i class="fa fa-clock-o"></i>
+		            <i id="clockphu3" class="fa fa-clock-o"></i>
 		            <span id="ngayDangTTPhu3"></span>
-		            <p id="noiDungTomTatTTPhu3" class="noi-dung-tom-tat"></p>            
+		            <p id="noiDungTomTatTTPhu3" class="noi-dung-tom-tat"></p>
+		            <p id="chinhsuatintucphu3" style="font-weight: bold; font-size: 25px;display: none;">Nội dung tin tức:</p>
+		            <textarea id="textchinhsuatintucphu3" class="form-control" style="display:none;" rows="2" cols="110" name="editor" id="editor"></textarea>
+		            <%if(flag){%><a id="edittintucphu3" style="float:right;padding:10px;color:white;background:#197485;cursor: pointer;">Chỉnh sửa</a><%} %>
+		            <button id="submittintucphu3" style="border:1px solid #197485;margin-top:5px;float:right;padding:10px;color:white;background:#197485;display:none;">Xác nhận</button>           
 		        </div>
 		    </div>
 	    </div>

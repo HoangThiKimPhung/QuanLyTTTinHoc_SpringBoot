@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	CKEDITOR.replace('ck_tomTatTinTuc');
+	CKEDITOR.replace('ck_tieuDeTinTuc');
+	
 	//Lấy mã tin tức tiếp theo
 	$.ajax({
 		type:"GET",

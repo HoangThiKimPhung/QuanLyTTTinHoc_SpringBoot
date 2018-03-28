@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	var fileTTEdit;
 	
+	CKEDITOR.replace('ck_tomTatTinTuc');
+	CKEDITOR.replace('ck_tieuDeTinTuc');
+	
 	//Load thông tin tin tức cũ lên form
 	$.ajax({
 		type:"GET",
@@ -8,8 +11,10 @@ $(document).ready(function(){
 		dataType:"json",
 		success:function(result){
 			$("#maTinTuc").val(result.maTT);
-			$("#tieuDeTinTuc").val(result.tieudeTT);
-			$("#tomTatTinTuc").val(result.tomtatTT);
+			//$("#tieuDeTinTuc").val(result.tieudeTT);
+			CKEDITOR.instances.ck_tieuDeTinTuc.setData(result.tieudeTT);
+			//$("#tomTatTinTuc").val(result.tomtatTT);
+			CKEDITOR.instances.ck_tomTatTinTuc.setData(result.tomtatTT);
 			$("#ngayDangTinTuc").val(result.dateTT);
 			fileTTEdit = result.fileTT;
 		}
@@ -31,22 +36,5 @@ $(document).ready(function(){
 		$("#myModal").css("display","none");
 	})
 
-	//Sự kiện cập nhật tin tức sau khi chỉnh sửa
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 })

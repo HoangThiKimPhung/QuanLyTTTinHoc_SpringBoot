@@ -17,6 +17,13 @@
 	<link rel="stylesheet" href="static/css/index.css" />
 </head>
 <body>
+	<%-- <%
+		String value = (String)request.getParameter("value");
+		if(value.equals("0")){
+			%><p>không đúng</p>
+		<%}
+	%> --%>
+	<%-- <p><%=request.getSession().getAttribute("value") %></p> --%>
 	<div class="container" id="modallogin">
           <div class="modal-dialog">
               <div class="modal-content">

@@ -49,6 +49,16 @@ public class TinTucRestController {
 		return tinTucService.LayTinTucPhu(1,4);
 	}
 	
+	@GetMapping("/lay3TinTucPhu")
+	public @ResponseBody List<TinTuc> Lay3TinTucPhu(@RequestParam("start") int start, @RequestParam("end") int end) {
+		return tinTucService.LayTinTucPhu(start, end);
+	}
+	
+	@GetMapping("/soLuongTinTuc")
+	public int SoLuongTinTuc() {
+		return tinTucService.SoLuongTinTuc();
+	}
+	
 	@GetMapping("/getAllTinTuc")
 	public @ResponseBody List<TinTuc> GetAllTinTuc() {
 		return tinTucService.GetAllTinTuc();

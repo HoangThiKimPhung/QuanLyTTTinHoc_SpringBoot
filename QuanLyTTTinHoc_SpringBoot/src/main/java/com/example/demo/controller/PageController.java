@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PageController {
@@ -22,10 +25,10 @@ public class PageController {
 	}
 	
 	
-	/*@GetMapping(value="/nhanvien")
+	@GetMapping(value="/test")
 	public String NhanVien() {
-		return "nhanvien";
-	}*/
+		return "test";
+	}
 	
 	@GetMapping(value="/NV-quanlytintuc")
 	public String NV_QuanLyTinTuc() {
@@ -42,13 +45,10 @@ public class PageController {
 		return "NV-chinh-sua-tin-tuc";
 	}
 	
-	@GetMapping("/test")
-	public String Test() {
-		return "test";
+	
+	@GetMapping("/logout")
+	public String Logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("maNV");
+		return "index";
 	}
-	
-	
-	
-	
-
 }
