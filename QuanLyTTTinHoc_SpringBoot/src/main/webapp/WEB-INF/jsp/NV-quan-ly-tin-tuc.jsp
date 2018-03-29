@@ -59,6 +59,7 @@
                     	<img src="static/Pic/doremon.png" alt="NhanVien">
                     	<span>Hoàng Thị Kim Phụng</span> 
                     </a>
+                    <a class="navbar-brand" href="/index" style="margin-right:-70px;margin-left:20px;float:right;"><i class="fa fa-home" style="margin-top: -12px;font-size: 45px;color:white;"></i></a>
                 </div>
             </div>
         </nav>
@@ -76,7 +77,7 @@
                     <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Thống kê DS Lớp học</a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-globe"></i> Quản lý thông báo</a></li>
                     <li class="active"><a href="NV-quanlytintuc"><i class="glyphicon glyphicon-globe"></i> Quản lý tin tức</a></li>
-                    <li><a href="index"><i class="glyphicon glyphicon-log-out"></i>  Thoát</a></li>
+                    <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i>  Thoát</a></li>
                 </ul>
             </div>
             <script>
