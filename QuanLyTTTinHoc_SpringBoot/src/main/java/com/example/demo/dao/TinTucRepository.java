@@ -151,9 +151,14 @@ public class TinTucRepository{
 	}
 
 	public int SoLuongTinTuc() {
-		Query query = entityManager.createNativeQuery("select fn_SoLuongTinTuc()");
-		int soLuongTinTuc = (int)query.getSingleResult();
-		return soLuongTinTuc;
+		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("spSoLuongTinTuc");
+		storedProcedure.registerStoredProcedureParameter(1, Integer.class, ParameterMode.OUT);
+		storedProcedure.execute();
+		int soLuong = (int)storedProcedure.getOutputParameterValue(1);
+		if(soLuong > 0) {
+			   return soLuong;
+		}
+		return 0;
 	}
 	
 	//Cập nhật 1 tin tức 
