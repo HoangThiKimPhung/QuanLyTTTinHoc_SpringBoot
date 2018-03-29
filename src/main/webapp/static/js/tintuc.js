@@ -295,165 +295,290 @@ $(document).ready(function(){
 	});
 	
 	
-	$("#edittieudephu1").click(function(e){		
-		$("#chinhsuatieudephu1").css('display','block');
-		//$("#textchinhsuatieudephu1").css('display','block');
-		$("#chinhsuatintucphu1").css('display','block');
-		//$("#textchinhsuatintucphu1").css('display','block');
-		$("#submittieudephu1").css('display','block');
-		$("#tieuDeTTPhu1").css('display','none');
-		$("#ngayDangTTPhu1").css('display','none');
-		$("#edittieudephu1").css('display','none');
-		$("#clockphu1").css('display','none');
-		CKEDITOR.replace('editortieudephu1');
-		flag1 = true;
+	$("#edittieudephu2").click(function(e){		
+		$("#chinhsuatieudephu2").css('display','block');
+		//$("#textchinhsuatieudephu2").css('display','block');
+		$("#chinhsuatintucphu2").css('display','block');
+		//$("#textchinhsuatintucphu2").css('display','block');
+		$("#submittieudephu2").css('display','block');
+		$("#tieuDeTTPhu2").css('display','none');
+		$("#ngayDangTTPhu2").css('display','none');
+		$("#edittieudephu2").css('display','none');
+		$("#clockphu2").css('display','none');
+		CKEDITOR.replace('editortieudephu2');
+		flag2 = true;
 		
-		$("#textchinhsuatieudephu1").val($("#tieuDeTTPhu1").text());
+		$("#textchinhsuatieudephu2").val($("#tieuDeTTPhu2").text());
 	});
 	
-	$("#edittintucphu1").click(function(e){		
-		//$("#textchinhsuatieudephu1").css('display','block');
-		$("#chinhsuatintucphu1").css('display','block');
-		//$("#textchinhsuatintucphu1").css('display','block');
-		$("#submittintucphu1").css('display','block');
-		$("#noiDungTomTatTTPhu1").css('display','none');
-		$("#ngayDangTTPhu1").css('display','none');
-		$("#edittintucphu1").css('display','none');
-		$("#clockphu1").css('display','none');
-		CKEDITOR.replace('editortintucphu1');
-		flag1 = true;
+	$("#edittintucphu2").click(function(e){		
+		//$("#textchinhsuatieudephu2").css('display','block');
+		$("#chinhsuatintucphu2").css('display','block');
+		//$("#textchinhsuatintucphu2").css('display','block');
+		$("#submittintucphu2").css('display','block');
+		$("#noiDungTomTatTTPhu2").css('display','none');
+		$("#ngayDangTTPhu2").css('display','none');
+		$("#edittintucphu2").css('display','none');
+		$("#clockphu2").css('display','none');
+		CKEDITOR.replace('editortintucphu2');
+		flag2 = true;
 		
-		$("#textchinhsuatintucphu1").val($("#noiDungTomTatTTPhu1").text());
+		$("#textchinhsuatintucphu2").val($("#noiDungTomTatTTPhu2").text());
 	});
 	
 	
-	
-	
-	$("#submittintucphu1").click(function(e) {
-        e.preventDefault();
-        $.ajax({
+	$("#submittieudephu2").click(function(e){
+		e.preventDefault();
+		$.ajax({
 			type:"POST",
-			url: "/editTinTucWebpage",
+			url: "/editTieuDeWebpage",
 			data:{
-				maTinTuc: $('#maTTphu1').val(),
-        		tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudephu1.getData(),
-        		tomTatTinTuc: CKEDITOR.instances.textchinhsuatintucphu1.getData()
+				maTinTuc: $('#maTTphu2').val(),
+        		tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudephu2.getData(),
+        		//tomTatTinTuc: CKEDITOR.instances.textchinhsuatintucchinh.getData()
 			},
 			dataType:"json",
 			success:function(result){
 				if(result == false){
-					/*if(fl == 1)
-						LoadTinTucPhu(2,4);
-					else
-						LoadTinTucPhu(5,7);*/
-					$('#tieuDeTTPhu1').html(CKEDITOR.instances.textchinhsuatieudephu1.getData());
-					$('#noiDungTomTatTTPhu1').html(CKEDITOR.instances.textchinhsuatintucphu1.getData());
+					/*$.ajax({
+						type:"GET",
+						url: "/getAllTinTuc",
+						dataType:"json",
+						success:function(result){
+							if(result == null){
+								alert("Không chỉnh sửa được tin tức!");
+								return;
+							}
+							else{
+								$('#imageTTChinh').attr("src",src + result[0].fileTT);
+								$("#imageTTChinh").css('display','block');
+								$('#tieuDeTTChinh').text(result[0].tieudeTT);
+								$('#ngayDangTTChinh').text(result[0].dateTT);
+								$('#noiDungTomTatTTChinh').text(result[0].tomtatTT);
+								$('#maTTchinh').val(result[0].maTT);
+								$("#tintucChinh").css('display','block');
+							}
+						}
+					});*/
+					$('#tieuDeTTPhu2').html(CKEDITOR.instances.textchinhsuatieudephu2.getData());
+					CKEDITOR.instances.textchinhsuatieudephu2.destroy();
+					$("#chinhsuatieudephu2").css('display','none');
+					$("#textchinhsuatieudephu2").css('display','none');
+					$("#chinhsuatintucphu2").css('display','none');
+					$("#textchinhsuatintucphu2").css('display','none');
+					$("#submittieudephu2").css('display','none');
+					$("#tieuDeTTPhu2").css('display','block');
+					$("#ngayDangTTPhu2").css('display','inline-block');
+					$("#edittieudephu2").css('display','block');
+					$("#clockphu2").css('display','block');
+					flag2 = false;
+					
 				}
 				else{
 					alert("Không chỉnh sửa được tin tức!");
 					return;
-				}				
+				}
 			}
-		});
-        
-        $("#chinhsuatieudephu1").css('display','none');
-        CKEDITOR.instances.textchinhsuatieudephu1.destroy();
-		CKEDITOR.instances.textchinhsuatintucphu1.destroy();
-		$("#textchinhsuatieudephu1").css('display','none');
-		$("#chinhsuatintucphu1").css('display','none');
-		$("#textchinhsuatintucphu1").css('display','none');
-		$("#submittintucphu1").css('display','none');
-		$("#tieuDeTTPhu1").css('display','block');
-		$("#noiDungTomTatTTPhu1").css('display','block');
-		$("#ngayDangTTPhu1").css('display','inline-block');
-		$("#edittintucphu1").css('display','block');
-		$("#clockphu1").css('display','block');
-		flag1 = false;
-    });
+		});		
+	});
 	
-	$("#submittintucphu2").click(function(e) {
-        e.preventDefault();
-        $.ajax({
+	$("#submittintucphu2").click(function(e){
+		e.preventDefault();
+		$.ajax({
 			type:"POST",
-			url: "/editTinTucWebpage",
+			url: "/editNoiDungWebpage",
 			data:{
 				maTinTuc: $('#maTTphu2').val(),
-        		tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudephu2.getData(),
+        		//tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudechinh.getData(),
         		tomTatTinTuc: CKEDITOR.instances.textchinhsuatintucphu2.getData()
 			},
 			dataType:"json",
 			success:function(result){
 				if(result == false){
-					/*if(fl == 1)
-						LoadTinTucPhu(2,4);
-					else
-						LoadTinTucPhu(5,7);*/
-					$('#tieuDeTTPhu2').html(CKEDITOR.instances.textchinhsuatieudephu2.getData());
+					/*$.ajax({
+						type:"GET",
+						url: "/getAllTinTuc",
+						dataType:"json",
+						success:function(result){
+							if(result == null){
+								alert("Không chỉnh sửa được tin tức!");
+								return;
+							}
+							else{
+								$('#imageTTChinh').attr("src",src + result[0].fileTT);
+								$("#imageTTChinh").css('display','block');
+								$('#tieuDeTTChinh').text(result[0].tieudeTT);
+								$('#ngayDangTTChinh').text(result[0].dateTT);
+								$('#noiDungTomTatTTChinh').text(result[0].tomtatTT);
+								$('#maTTchinh').val(result[0].maTT);
+								$("#tintucChinh").css('display','block');
+							}
+						}
+					});*/
 					$('#noiDungTomTatTTPhu2').html(CKEDITOR.instances.textchinhsuatintucphu2.getData());
+					CKEDITOR.instances.textchinhsuatintucphu2.destroy();
+					$("#chinhsuatieudephu2").css('display','none');
+					$("#textchinhsuatieudephu2").css('display','none');
+					$("#chinhsuatintucphu2").css('display','none');
+					$("#textchinhsuatintucphu2").css('display','none');
+					$("#submittintucphu2").css('display','none');
+					$("#noiDungTomTatTTPhu2").css('display','block');
+					$("#ngayDangTTPhu2").css('display','inline-block');
+					$("#edittintucphu2").css('display','block');
+					$("#clockphu2").css('display','block');
+					flag2 = false;
+					
 				}
 				else{
 					alert("Không chỉnh sửa được tin tức!");
 					return;
-				}				
+				}
 			}
-		});
-        
-        $("#chinhsuatieudephu2").css('display','none');
-        CKEDITOR.instances.textchinhsuatieudephu2.destroy();
-		CKEDITOR.instances.textchinhsuatintucphu2.destroy();
-		$("#textchinhsuatieudephu2").css('display','none');
-		$("#chinhsuatintucphu2").css('display','none');
-		$("#textchinhsuatintucphu2").css('display','none');
-		$("#submittintucphu2").css('display','none');
-		$("#tieuDeTTPhu2").css('display','block');
-		$("#noiDungTomTatTTPhu2").css('display','block');
-		$("#ngayDangTTPhu2").css('display','inline-block');
-		$("#edittintucphu2").css('display','block');
-		$("#clockphu2").css('display','block');
-		flag2 = false;
-    });
+		});		
+	});
 	
-	$("#submittintucphu3").click(function(e) {
-        e.preventDefault();
-        $.ajax({
+	$("#edittieudephu3").click(function(e){		
+		$("#chinhsuatieudephu3").css('display','block');
+		//$("#textchinhsuatieudephu3").css('display','block');
+		$("#chinhsuatintucphu3").css('display','block');
+		//$("#textchinhsuatintucphu3").css('display','block');
+		$("#submittieudephu3").css('display','block');
+		$("#tieuDeTTPhu3").css('display','none');
+		$("#ngayDangTTPhu3").css('display','none');
+		$("#edittieudephu3").css('display','none');
+		$("#clockphu3").css('display','none');
+		CKEDITOR.replace('editortieudephu3');
+		flag3 = true;
+		
+		$("#textchinhsuatieudephu3").val($("#tieuDeTTPhu3").text());
+	});
+	
+	$("#edittintucphu3").click(function(e){		
+		//$("#textchinhsuatieudephu3").css('display','block');
+		$("#chinhsuatintucphu3").css('display','block');
+		//$("#textchinhsuatintucphu3").css('display','block');
+		$("#submittintucphu3").css('display','block');
+		$("#noiDungTomTatTTPhu3").css('display','none');
+		$("#ngayDangTTPhu3").css('display','none');
+		$("#edittintucphu3").css('display','none');
+		$("#clockphu3").css('display','none');
+		CKEDITOR.replace('editortintucphu3');
+		flag3 = true;
+		
+		$("#textchinhsuatintucphu3").val($("#noiDungTomTatTTPhu3").text());
+	});
+	
+	
+	$("#submittieudephu3").click(function(e){
+		e.preventDefault();
+		$.ajax({
 			type:"POST",
-			url: "/editTinTucWebpage",
+			url: "/editTieuDeWebpage",
 			data:{
 				maTinTuc: $('#maTTphu3').val(),
         		tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudephu3.getData(),
+        		//tomTatTinTuc: CKEDITOR.instances.textchinhsuatintucchinh.getData()
+			},
+			dataType:"json",
+			success:function(result){
+				if(result == false){
+					/*$.ajax({
+						type:"GET",
+						url: "/getAllTinTuc",
+						dataType:"json",
+						success:function(result){
+							if(result == null){
+								alert("Không chỉnh sửa được tin tức!");
+								return;
+							}
+							else{
+								$('#imageTTChinh').attr("src",src + result[0].fileTT);
+								$("#imageTTChinh").css('display','block');
+								$('#tieuDeTTChinh').text(result[0].tieudeTT);
+								$('#ngayDangTTChinh').text(result[0].dateTT);
+								$('#noiDungTomTatTTChinh').text(result[0].tomtatTT);
+								$('#maTTchinh').val(result[0].maTT);
+								$("#tintucChinh").css('display','block');
+							}
+						}
+					});*/
+					$('#tieuDeTTPhu3').html(CKEDITOR.instances.textchinhsuatieudephu3.getData());
+					CKEDITOR.instances.textchinhsuatieudephu3.destroy();
+					$("#chinhsuatieudephu3").css('display','none');
+					$("#textchinhsuatieudephu3").css('display','none');
+					$("#chinhsuatintucphu3").css('display','none');
+					$("#textchinhsuatintucphu3").css('display','none');
+					$("#submittieudephu3").css('display','none');
+					$("#tieuDeTTPhu3").css('display','block');
+					$("#ngayDangTTPhu3").css('display','inline-block');
+					$("#edittieudephu3").css('display','block');
+					$("#clockphu3").css('display','block');
+					flag3 = false;
+					
+				}
+				else{
+					alert("Không chỉnh sửa được tin tức!");
+					return;
+				}
+			}
+		});		
+	});
+	
+	$("#submittintucphu3").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			type:"POST",
+			url: "/editNoiDungWebpage",
+			data:{
+				maTinTuc: $('#maTTphu3').val(),
+        		//tieuDeTinTuc: CKEDITOR.instances.textchinhsuatieudechinh.getData(),
         		tomTatTinTuc: CKEDITOR.instances.textchinhsuatintucphu3.getData()
 			},
 			dataType:"json",
 			success:function(result){
 				if(result == false){
-					/*if(fl == 1)
-						LoadTinTucPhu(2,4);
-					else
-						LoadTinTucPhu(5,7);*/
-					$('#tieuDeTTPhu3').html(CKEDITOR.instances.textchinhsuatieudephu3.getData());
-					$('#noiDungTomTatTTPhu3').html(CKEDITOR.instances.textchinhsuatintucphu3.getData());
+					/*$.ajax({
+						type:"GET",
+						url: "/getAllTinTuc",
+						dataType:"json",
+						success:function(result){
+							if(result == null){
+								alert("Không chỉnh sửa được tin tức!");
+								return;
+							}
+							else{
+								$('#imageTTChinh').attr("src",src + result[0].fileTT);
+								$("#imageTTChinh").css('display','block');
+								$('#tieuDeTTChinh').text(result[0].tieudeTT);
+								$('#ngayDangTTChinh').text(result[0].dateTT);
+								$('#noiDungTomTatTTChinh').text(result[0].tomtatTT);
+								$('#maTTchinh').val(result[0].maTT);
+								$("#tintucChinh").css('display','block');
+							}
+						}
+					});*/
+					$('#noiDungTomTatTTPhu1').html(CKEDITOR.instances.textchinhsuatintucphu3.getData());
+					CKEDITOR.instances.textchinhsuatintucphu3.destroy();
+					$("#chinhsuatieudephu3").css('display','none');
+					$("#textchinhsuatieudephu3").css('display','none');
+					$("#chinhsuatintucphu3").css('display','none');
+					$("#textchinhsuatintucphu3").css('display','none');
+					$("#submittintucphu3").css('display','none');
+					$("#noiDungTomTatTTPhu3").css('display','block');
+					$("#ngayDangTTPhu3").css('display','inline-block');
+					$("#edittintucphu3").css('display','block');
+					$("#clockphu3").css('display','block');
+					flag3 = false;
+					
 				}
 				else{
 					alert("Không chỉnh sửa được tin tức!");
 					return;
-				}				
+				}
 			}
-		});
-        
-        $("#chinhsuatieudephu3").css('display','none');
-        CKEDITOR.instances.textchinhsuatieudephu3.destroy();
-		CKEDITOR.instances.textchinhsuatintucphu3.destroy();
-		$("#textchinhsuatieudephu3").css('display','none');
-		$("#chinhsuatintucphu3").css('display','none');
-		$("#textchinhsuatintucphu3").css('display','none');
-		$("#submittintucphu3").css('display','none');
-		$("#tieuDeTTPhu3").css('display','block');
-		$("#noiDungTomTatTTPhu3").css('display','block');
-		$("#ngayDangTTPhu3").css('display','inline-block');
-		$("#edittintucphu3").css('display','block');
-		$("#clockphu3").css('display','block');
-		flag3 = false;
-    });
+		});		
+	});
+	
 	
 	function LoadAllTinTuc(){
 		$.ajax({
