@@ -96,6 +96,7 @@ $(document).ready(function(){
 													success:function(result){
 														alert("Xóa tin tức thành công!");
 														$(temp).closest('tr').remove();
+														window.location.assign("NV-quanlytintuc");
 													}
 												})
 											}
