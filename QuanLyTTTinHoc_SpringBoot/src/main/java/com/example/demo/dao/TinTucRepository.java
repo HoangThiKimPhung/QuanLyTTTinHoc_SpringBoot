@@ -157,16 +157,29 @@ public class TinTucRepository{
 	}
 	
 	//Cập nhật 1 tin tức 
-	public boolean EditTinTucWebpage(String maTinTuc, String tieuDeTinTuc,String tomTatTinTuc) {
-		   StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("spChinhSuaTinTuc");
+	public boolean EditTieuDeWebpage(String maTinTuc, String tieuDeTinTuc) {
+		   StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("spChinhSuaTieuDeTinTuc");
 		   
 		   // Set the parameters of the stored procedure.
 		   storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
 		   storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-		   storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
 		   storedProcedure.setParameter(1, maTinTuc);
 		   storedProcedure.setParameter(2, tieuDeTinTuc);
-		   storedProcedure.setParameter(3, tomTatTinTuc);
+		   
+		   // Call the stored procedure. 
+		   boolean result = storedProcedure.execute();
+		   
+		   return result;
+	}
+	
+	public boolean EditNoiDungWebpage(String maTinTuc, String tomTatTinTuc) {
+		   StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("spChinhSuaNoiDungTinTuc");
+		   
+		   // Set the parameters of the stored procedure.
+		   storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+		   storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+		   storedProcedure.setParameter(1, maTinTuc);
+		   storedProcedure.setParameter(2, tomTatTinTuc);
 		   
 		   // Call the stored procedure. 
 		   boolean result = storedProcedure.execute();

@@ -81,20 +81,40 @@ public class TinTucController {
 		return "redirect:/NV-quanlytintuc";
 	}
 	
-	@PostMapping("/editTinTucWebpage")
+	@PostMapping("/editTieuDeWebpage")
 	public @ResponseBody boolean EditTinTucWebpage(@RequestParam("maTinTuc") String maTinTuc,
 			@RequestParam("tieuDeTinTuc") String tieuDeTinTuc,
-			@RequestParam("tomTatTinTuc") String tomTatTinTuc,
 			HttpServletRequest request) throws IOException {
+		/*System.out.println(maTinTuc);
+		System.out.println(tieuDeTinTuc);
+		System.out.println(tomTatTinTuc);*/
 		errorinput = "";
 		request.getSession().setAttribute("errorinput",errorinput);
 		
-        if(tieuDeTinTuc.trim().length() <= 0 || tomTatTinTuc.trim().length() <= 0) {
-        	errorinput = "Vui lòng nhập đầy đủ thông tin cho Tin tức!!!";
+        if(tieuDeTinTuc.trim().length() <= 0) {
+        	errorinput = "Vui lòng nhập tiêu đề cho tin tức!!!";
         	request.getSession().setAttribute("errorinput",errorinput);
         	return false;
         }
-        return tinTucService.EditTinTucWebpage(maTinTuc, tieuDeTinTuc, tomTatTinTuc);
+        return tinTucService.EditTieuDeWebpage(maTinTuc, tieuDeTinTuc);
+	}
+	
+	@PostMapping("/editNoiDungWebpage")
+	public @ResponseBody boolean EditNoiDungWebpage(@RequestParam("maTinTuc") String maTinTuc,
+			@RequestParam("tomTatTinTuc") String tomTatTinTuc,
+			HttpServletRequest request) throws IOException {
+		/*System.out.println(maTinTuc);
+		System.out.println(tieuDeTinTuc);
+		System.out.println(tomTatTinTuc);*/
+		errorinput = "";
+		request.getSession().setAttribute("errorinput",errorinput);
+		
+        if(tomTatTinTuc.trim().length() <= 0) {
+        	errorinput = "Vui lòng nhập nội dung cho tin tức!!!";
+        	request.getSession().setAttribute("errorinput",errorinput);
+        	return false;
+        }
+        return tinTucService.EditNoiDungWebpage(maTinTuc, tomTatTinTuc);
 	}
 	
 	public String uploadFile(MultipartFile file, Drive service) throws IOException{

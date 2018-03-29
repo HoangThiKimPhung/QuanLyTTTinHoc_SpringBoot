@@ -4,7 +4,7 @@ body{
     margin:0;
 }
 
-/*ĐƯỜNG DẪN*/
+/*Ä�Æ¯á»œNG DáºªN*/
 .duong-dan{
     padding-top: 5px;
 }
@@ -17,7 +17,7 @@ body{
 }
 
 
-/*TIN TỨC*/
+/*TIN Tá»¨C*/
 .line{
     padding-left: 5px;
     padding-right: 5px;
@@ -25,15 +25,8 @@ body{
     margin: 5px;
     border-bottom: 1px dashed #197485;
 }
-.thong-bao-tin-tuc a{
-    text-decoration: none;
-    color: #035968;
-}
-.thong-bao-tin-tuc a:hover{
+.tieude:hover{
     color:red;
-}
-.thong-bao-tin-tuc span,.thong-bao-tin-tuc i{
-    color: #B6B3B3;
 }
 img{
     margin-bottom: 5px;
@@ -50,7 +43,7 @@ img{
 .xem-tiep-noi-dung a{
 	text-decoration: none;
 }
-/*NỘI DUNG THÔNG BÁO*/
+/*Ná»˜I DUNG THÃ”NG BÃ�O*/
 .noi-dung-thong-bao{
     width: 100%;
     height: 100%;
@@ -66,7 +59,9 @@ img{
 	color:white !improtant;
 }
 
-
+button:hover{
+	color:#19748f;
+}
 
 @media only screen and (max-width: 768px){    
     .thong-bao-tin-tuc a,.thong-bao-tin-tuc h3{

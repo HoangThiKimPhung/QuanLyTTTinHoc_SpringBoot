@@ -70,8 +70,13 @@ public class TinTucService {
 		return tinTucRepository.SoLuongTinTuc();
 	}
 	
-	public boolean EditTinTucWebpage(String maTinTuc, String tieuDeTinTuc,String tomTatTinTuc) {
-		boolean kq = tinTucRepository.EditTinTucWebpage(maTinTuc, tieuDeTinTuc, tomTatTinTuc);
+	public boolean EditTieuDeWebpage(String maTinTuc, String tieuDeTinTuc) {
+		boolean kq = tinTucRepository.EditTieuDeWebpage(maTinTuc, tieuDeTinTuc);
+		return kq;
+	}
+	
+	public boolean EditNoiDungWebpage(String maTinTuc, String tomTatTinTuc) {
+		boolean kq = tinTucRepository.EditNoiDungWebpage(maTinTuc, tomTatTinTuc);
 		return kq;
 	}
 }
