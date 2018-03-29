@@ -14,13 +14,13 @@ $(document).ready(function(){
 				for(i=0; i<n; i++){
 					$('#dsTinTucNoiBat').append(
 						$('<li>').append(
-							$('<a href="#">').text(result[i].tieudeTT)
+							$('<a href="#">').html(result[i].tieudeTT)
 							).append(
 							$('<br>')		
 							).append(
 							$('<i class="fa fa-clock-o">')		
 							).append(
-							$('<span>').text(" " + result[i].dateTT)		
+							$('<span>').html(" " + result[i].dateTT)		
 							)
 					)
 				}
