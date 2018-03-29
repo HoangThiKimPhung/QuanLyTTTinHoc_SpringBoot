@@ -150,6 +150,27 @@ public class TinTucRepository{
 		   return result;
 	}
 
+	public int SoLuongTinTuc() {
+		Query query = entityManager.createNativeQuery("select fn_SoLuongTinTuc()");
+		int soLuongTinTuc = (int)query.getSingleResult();
+		return soLuongTinTuc;
+	}
 	
-
+	//Cập nhật 1 tin tức 
+	public boolean EditTinTucWebpage(String maTinTuc, String tieuDeTinTuc,String tomTatTinTuc) {
+		   StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("spChinhSuaTinTuc");
+		   
+		   // Set the parameters of the stored procedure.
+		   storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+		   storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+		   storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
+		   storedProcedure.setParameter(1, maTinTuc);
+		   storedProcedure.setParameter(2, tieuDeTinTuc);
+		   storedProcedure.setParameter(3, tomTatTinTuc);
+		   
+		   // Call the stored procedure. 
+		   boolean result = storedProcedure.execute();
+		   
+		   return result;
+	}
 }

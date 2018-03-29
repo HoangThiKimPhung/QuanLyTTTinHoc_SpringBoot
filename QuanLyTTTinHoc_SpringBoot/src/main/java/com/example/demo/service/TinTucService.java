@@ -54,7 +54,7 @@ public class TinTucService {
 		return kq;
 	}
 	
-	//Thêm mới 1 tin tức
+	//Chỉnh sửa 1 tin tức
 	public boolean EditTinTuc(String maTinTuc, String tieuDeTinTuc,String tomTatTinTuc, String ngayDangTinTuc,String fileTT) {
 		boolean kq = tinTucRepository.EditTinTuc(maTinTuc, tieuDeTinTuc, tomTatTinTuc, ngayDangTinTuc, fileTT);
 		return kq;
@@ -63,5 +63,15 @@ public class TinTucService {
 	//Xóa một tin tức
 	public boolean DeleteTinTuc(String maTT) {
 		return tinTucRepository.DeleteTinTuc(maTT);
+	}
+	
+	//Đếm số lượng tin tức
+	public int SoLuongTinTuc(){
+		return tinTucRepository.SoLuongTinTuc();
+	}
+	
+	public boolean EditTinTucWebpage(String maTinTuc, String tieuDeTinTuc,String tomTatTinTuc) {
+		boolean kq = tinTucRepository.EditTinTucWebpage(maTinTuc, tieuDeTinTuc, tomTatTinTuc);
+		return kq;
 	}
 }

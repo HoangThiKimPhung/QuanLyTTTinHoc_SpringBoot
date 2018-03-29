@@ -61,8 +61,13 @@ public class DangNhapController {
         }
     }
     @PostMapping("/dangnhap")
-	public RedirectView localRedirect() throws IOException, GeneralSecurityException  {
-	    
+	public RedirectView localRedirect(HttpServletRequest request) throws IOException, GeneralSecurityException  {
+    	String authorizeUrl;
+    	
+		if(request.getSession().getAttribute("maNV") != null) {
+			return new RedirectView("nhanvien");
+		}
+    	
         InputStream in =
                 DangNhapController.class.getResourceAsStream("/client_secret.json");
         clientSecrets =
@@ -75,10 +80,10 @@ public class DangNhapController {
                 .build();
         
         
-        String authorizeUrl = flow.newAuthorizationUrl()
+        authorizeUrl = flow.newAuthorizationUrl()
                 .setRedirectUri(redirectURL).build();
         
-    	RedirectView redirectView = new RedirectView();
+        RedirectView redirectView = new RedirectView();
 		redirectView.setUrl(authorizeUrl);
 			
 	    return redirectView;
@@ -88,8 +93,10 @@ public class DangNhapController {
 	@GetMapping("/nhanvien")
 	public String LoginGoogle(@RequestParam(value="code",required = false) String code,HttpServletRequest request) throws Exception {
 		codeDrive = code;
-		if(request.getSession().getAttribute("maNV") != null)
+		
+		if(request.getSession().getAttribute("maNV") != null) {
 			return "nhanvien";
+		}
 		
 		if(codeDrive != null) {
 			GoogleAuthorizationCodeTokenRequest tokenRequest = flow.newTokenRequest(codeDrive);
@@ -119,9 +126,8 @@ public class DangNhapController {
 		      }
 		    			
 		}
+		//request.getSession().setAttribute("value", "bo");
 		return "redirect:/login";
-	}
-	
-	
+	}	
 	
 }

@@ -37,9 +37,9 @@ $(document).ready(function(){
 					).append(
 					$('<td>').text(result[i].maTT.trim())		
 					).append(
-					$('<td>').text(result[i].tieudeTT)		
+					$('<td>').html(result[i].tieudeTT)		
 					).append(
-					$('<td>').text(result[i].tomtatTT)		
+					$('<td>').html(result[i].tomtatTT)		
 					).append(
 					$('<td>').text(result[i].dateTT)		
 					).append(

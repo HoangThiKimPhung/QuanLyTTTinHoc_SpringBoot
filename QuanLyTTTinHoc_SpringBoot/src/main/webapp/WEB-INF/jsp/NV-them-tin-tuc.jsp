@@ -13,6 +13,8 @@
     <script src="static/js/jquery-3.2.1.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="static/css/w3.css">
+    <!-- CK Editor -->
+    <script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
     <!-- Glyphicons -->
     <link rel="stylesheet" href="static/css/font-awesome.min.css">
     <!-- MY CSS -->
@@ -77,29 +79,31 @@
     <section class="phan-noi-dung">
         <br />
         <div class="w3-row">
-            <div class="w3-twothird">
+            <div>
                 <form action="addtintuc" method="POST" enctype="multipart/form-data" class="form-horizontal">
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3">Mã tin tức:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
+                        <label class="control-label col-xs-12 col-sm-2 col-md-2">Mã tin tức:</label>
+                        <div class="col-xs-12 col-sm-8 col-md-8">
                             <input type="text" id="maTinTuc" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3">Tiêu đề tin tức:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
-                            <input type="text" name="tieuDeTinTuc" class="form-control">
+                        <label class="control-label col-xs-12 col-sm-2 col-md-2">Tiêu đề tin tức:</label>
+                        <div class="col-xs-12 col-sm-8 col-md-8">
+                            <!-- <input type="text" name="tieuDeTinTuc" class="form-control"> -->
+                            <textarea class="form-control" name="tieuDeTinTuc" rows="2" cols="50" id="ck_tieuDeTinTuc"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3">Tóm tắt tin tức:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
-                            <textarea class="form-control" name="tomTatTinTuc" rows="10" cols="50"></textarea>
+                        <label class="control-label col-xs-12 col-sm-2 col-md-2">Tóm tắt tin tức:</label>
+                        <div class="col-xs-12 col-sm-8 col-md-8">
+                            <!-- <textarea class="form-control" name="tomTatTinTuc" rows="10" cols="50"></textarea> -->
+                            <textarea class="form-control" name="tomTatTinTuc" rows="15" cols="50" id="ck_tomTatTinTuc"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3">Ngày đăng tin tức:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
+                        <label class="control-label col-xs-12 col-sm-2 col-md-2">Ngày đăng tin tức:</label>
+                        <div class="col-xs-12 col-sm-8 col-md-8">
                             <input type="date" name="ngayDangTinTuc" class="form-control"
                             <%
                        			Date date = new Date();                        			  
@@ -111,8 +115,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3">Hình ảnh:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
+                        <label class="control-label col-xs-12 col-sm-2 col-md-2">Hình ảnh:</label>
+                        <div class="col-xs-12 col-sm-8 col-md-8">
                         	<div class="input-group">
 								<input id="file" type="file" name="file">
 							</div>
@@ -125,7 +129,7 @@
 	                        />
 	                    </div>
 	                </div>
-                </from>
+                </form>
             </div>
         </div>
         

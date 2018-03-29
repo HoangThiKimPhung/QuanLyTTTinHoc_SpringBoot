@@ -15,6 +15,8 @@
     <script src="static/js/jquery-3.2.1.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="static/css/w3.css">
+     <!-- CK Editor -->
+    <script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
     <!-- Glyphicons -->
     <link rel="stylesheet" href="static/css/font-awesome.min.css">
     <!-- MY CSS -->
@@ -177,13 +179,15 @@
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-3 col-md-3">Tiêu đề tin tức:</label>
                         <div class="col-xs-12 col-sm-9 col-md-9">
-                            <input type="text" name="tieuDeTinTuc" id="tieuDeTinTuc" class="form-control">
+                            <!-- <input type="text" name="tieuDeTinTuc" id="tieuDeTinTuc" class="form-control"> -->
+                            <textarea class="form-control" name="tieuDeTinTuc" rows="2" cols="50" id="ck_tieuDeTinTuc"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-3 col-md-3">Tóm tắt tin tức:</label>
                         <div class="col-xs-12 col-sm-9 col-md-9">
-                            <textarea class="form-control" name="tomTatTinTuc" id="tomTatTinTuc" rows="10" cols="50"></textarea>
+                            <!-- <textarea class="form-control" name="tomTatTinTuc" id="tomTatTinTuc" rows="10" cols="50"></textarea> -->
+                        	<textarea class="form-control" name="tomTatTinTuc" rows="15" cols="50" id="ck_tomTatTinTuc"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
